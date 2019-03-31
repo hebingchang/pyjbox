@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='pyjbox',
-      version='1.2',
+      version='1.3',
       description='jBox downloader with multiple threads and resume from break point support!',
       url='http://github.com/hebingchang/pyjbox',
       author='hebingchang',

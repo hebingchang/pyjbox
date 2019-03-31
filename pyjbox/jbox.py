@@ -38,10 +38,11 @@ class JboxShare:
 
     def download(self, connections=4, timeout=5):
         manager = downloader.DownloadManager(self.file_id, self.download_url, self.file_name, self.file_size, connections, timeout)
-        if sys.platform != 'win32':
-            signal.signal(signal.SIGINT, manager.signal_handler)
-        else:
-            signal.signal(signal.CTRL_C_EVENT, manager.signal_handler)
+        # signal.signal(signal.SIGINT, manager.signal_handler)
 
-        result = manager.start_download()
-        return result
+        try:
+            result = manager.start_download()
+            return result
+
+        except KeyboardInterrupt:
+            manager.signal_handler(None, None)
