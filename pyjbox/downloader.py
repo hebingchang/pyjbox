@@ -129,7 +129,7 @@ class DownloadMonitor(threading.Thread):
                 delta = timedelta(seconds=(self.file_size - downloaded_size) / (speed * 1024 * 1024))
                 eta = delta - timedelta(microseconds=delta.microseconds)
 
-            sys.stdout.write("\r%.2f MB/s [%s>%s] %.2f%%\t%s/%s Connections\tETA: %s" %
+            sys.stdout.write("\r%.2f MB/s [%s>%s] %.2f%% [%s/%s Connections] [ETA: %s]" %
                              (speed, '=' * (done - 1), ' ' * (progress_bar_width - done),
                               downloaded_size / self.file_size * 100, active_threads, self.connections,
                               eta))
