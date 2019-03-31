@@ -1,4 +1,4 @@
-import requests, json
+import requests, json, sys
 from pyjbox import downloader
 import signal
 from urllib.parse import unquote
@@ -38,7 +38,10 @@ class JboxShare:
 
     def download(self, connections=4, timeout=5):
         manager = downloader.DownloadManager(self.file_id, self.download_url, self.file_name, self.file_size, connections, timeout)
-        signal.signal(signal.SIGINT, manager.signal_handler)
+        if sys.platform != 'win32':
+            signal.signal(signal.SIGINT, manager.signal_handler)
+        else:
+            signal.signal(signal.CTRL_C_EVENT, manager.signal_handler)
 
         result = manager.start_download()
         return result

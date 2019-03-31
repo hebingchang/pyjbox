@@ -197,8 +197,7 @@ class Downloader(threading.Thread):
                     finally:
                         lock.release()
 
-
-                except requests.exceptions.ConnectionError:
+                except (requests.exceptions.ConnectionError, requests.exceptions.ChunkedEncodingError):
                     # print('Timeout!')
                     self.return_status()
                     self.network_error.set()
